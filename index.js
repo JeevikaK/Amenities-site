@@ -15,7 +15,7 @@ app.set('view engine', 'ejs');
 const dbURI = "mongodb+srv://JeevikaK:Jeevika%402001@datas.howyjrm.mongodb.net/datas?retryWrites=true&w=majority";
 mongoose.connect(dbURI)
     .then((result) => {
-        app.listen(3000)
+        app.listen(process.env.PORT || 3000)
         console.log('Connected to MongoDB')
     })
     .catch((err) => console.log(err))
