@@ -32,11 +32,11 @@ app.use(sessions({
     resave: false 
 }));
 
-app.get('/login', (req, res) =>{
+app.get('/', (req, res) =>{
     res.render('login', {message: "", title: "Login"});
 }); 
 
-app.post('/login', (req, res) => {
+app.post('/', (req, res) => {
     const {username, password} = req.body
     req.session.username = username
     req.session.password = password
@@ -99,7 +99,7 @@ app.get('/home', (req, res) =>{
     const username = req.session.username
     const password = req.session.password
     if(!username || !password){
-        res.redirect('/login')
+        res.redirect('/')
     }
     else{
         res.render('home', {title: "Home"});
@@ -116,7 +116,7 @@ app.get('/book/:id', (req, res) =>{
     const username = req.session.username
     const password = req.session.password
     if(!username || !password){
-        res.redirect('/login')
+        res.redirect('/')
     }
     else{
         res.render('book', {id : req.params.id, title: 'Book'});
@@ -169,5 +169,5 @@ app.get('/thankyou', (req, res) => {
 app.post('/thankyou', (req, res) => {
     req.session.destroy()
     console.log('deleted')
-    res.redirect('/login')
+    res.redirect('/')
 })
