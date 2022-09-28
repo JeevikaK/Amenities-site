@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Amenities | <%= title %></title>
+    <link rel="stylesheet" href="/style1.css">
+</head>
+<body>
+    <section class="signup">
+        <div class="left">
+        </div>
+        <div class="right">
+            <div class="heading">BOOK YOUR AMENITY</div>
+            <div class="signup-form">
+                <h1 class="signup-heading">Sign Up</h1>
+                <form action="/signup" method="POST">
+                    <div>
+                        <div class="col_1">
+                            <label for="name">Name</label>
+                            <input type="text" name="name" placeholder="Enter Name" required>
+                            <label for="phone">Phone Number</label>
+                            <input type="text" name="phone" placeholder="Enter Phone no." required>
+                            <label for="email">Email ID</label>
+                            <input type="text" name="email" placeholder="Enter Email ID required">
+                            
+                            
+                        </div>
+                        <div class="col_2">
+                            <label for="username">Username</label>
+                            <input type="text" name="username" placeholder="Enter Username" required>
+                            <label for="password">Password</label>
+                            <input type="password" name="password" placeholder="Enter Password" required>
+                            <label for="confirm_password">Confirm Password</label>
+                            <input type="password" name="confirm_password" placeholder="Confirm Pasword" required>
+                        </div>
+                    </div>
+                    <span class="error"><%- message %></span>
+                    <input type="submit" value="Submit" id="submit_button">
+                </form>
+                <h3 class="back_login">Already have an account? <a href="login">Login</a></h3>
+                
+            </div>
+        </div>
+    </section>
+</body>
+</html>

@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Amenities | <%= title %></title>
+    <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+    <div class="thankyou">
+        <p class="thanks_for_booking">Thank You for booking!</p>
+        <p class="confirm">Your Booking is Confirmed!</p>
+        <div class="booking_details">
+            <p class="details_heading">
+                Booking details
+            </p>
+            <div class="details">
+                <p class="details_text">Booking ID: <%= booking_id%> </p>
+                <p class="details_text">Anemity: <%= amenity %></p>
+                <p class="details_text">Date: <%= date %></p>
+                <p class="details_text">Time: <%= time %></p>
+            </div>
+        </div>
+        <form action="/thankyou" method="POST">
+            <div class="logout_thankyou">
+                <input type="submit" name="Submit" value="Logout" class="thankyou_button">
+            </div>
+        </form>
+        
+    </div>
+    
+</body>
+</html>

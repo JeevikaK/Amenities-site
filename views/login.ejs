@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Amenities | <%= title %></title>
+    <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+    <section class="login">
+        <div class="left">
+        </div>
+        <div class="right">
+            <div class="heading">BOOK YOUR AMENITY</div>
+            <div class="login-form">
+                <h1 class="login-heading">Login</h1>
+                <form action="/login" method="POST" class="login_form">
+                    <h3 class="credentials" style="align-self: flex-start;">Username</h3>
+                    <input type="text" name="username" placeholder="Enter Username" required>
+                    <h3 class="credentials" style="align-self: flex-start;">Password</h3>
+                    <input type="password" name="password" id="password" placeholder="Enter Password" required>
+                    <span class="error"><%- message %></span>
+                    <h4 class="credentials">Not a member? <a href="signup">Signup</a></h4>
+                   <input type="submit" name="Submit" id="submit_button" value="Login">
+                </form>
+            </div>
+        </div>
+    </section>
+</body>
+</html>

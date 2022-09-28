@@ -1,0 +1,143 @@
+*{
+    margin: 0%;
+    padding: 0%;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+/*---------SignUp Page----------*/
+
+.signup{
+    display: flex;
+}
+.left, .right{
+    height: 100vh;
+}
+.left{
+    width: 40vw;
+    background-image: url('/images/pool.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    /* background: linear-gradient(to left,#fffffe, #10ccf2); */
+}
+.right{
+    width: 60vw;
+    height: 100%;
+    background-color: #ffffff;
+    align-items: center;
+    height: 100vh;
+    /* background-image: url('/images/white.webp');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover; */
+}
+.signup-form{
+    padding: 1em;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+}
+.signup-heading{
+    /* padding-bottom: 1em; */
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1.2em;
+    text-align: center;
+}
+.heading{
+    text-align: center;
+    font-size: 2em;
+    position: relative;
+    color: #00004d;
+    padding-left: 0.5em;
+    padding-top: 1.2em;
+}
+
+.heading::after, .signup-heading::after{
+    content: '';
+    display: block;
+    height: 1px;
+    margin: 0.2em auto 1em;
+    background: black;
+    opacity: 0.5;
+    width: 70%;
+}
+input[type=text], input[type=password]{
+    width: 20em;
+    padding: 12px 20px;
+    margin: 8px 0;
+    border-radius: 0.5em;
+    box-sizing: border-box;
+    border: none;
+    box-shadow: 1px 1px 7px -1px rgba(0, 0, 0, 0.4);;
+}
+form{
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    align-items: center;
+}
+form > div{
+    padding: 1em;
+    display: flex;
+    padding: 1em;
+    justify-content: space-between;
+}
+.col_1, .col_2{
+    display: flex;
+    flex-direction: column;
+}
+.col_1{
+    margin-right: 4em;
+}
+.back_login{
+    margin-left: 2em;
+    margin-top: 1em;
+    font-size: 1em;
+}
+#submit_button{
+    background-color: #005ce6;
+    border-radius: 0.8em;
+    width: 30%;
+    position: relative;
+    border: none;
+    color: white;
+    padding: 0.5em;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin-top: 3vh;
+    cursor: pointer;
+  }
+
+.error{
+    font-size: 0.8em;
+    color: red;
+}
+
+@media (max-width:1000px) {
+    .left{
+        display: none;
+    }
+    .right{
+        background-image: url('/images/white.webp');
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: cover;
+        width: 100%;
+    }
+    .form{
+        display: flex;
+        flex-direction: column;
+    }
+}
+@media (max-width:650px) {
+    form > div{
+        flex-direction: column;
+        align-items: center;
+    }
+    .col_1{
+        margin-right: 0%;
+    }
+}
