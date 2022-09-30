@@ -21,6 +21,10 @@ const db_input = new Schema({
   amenity: {
     type: String,
     required: true,
+  },
+  booking_id: {
+    type: String,
+    required: true
   }
 }, { timestamps: true});
 

@@ -59,7 +59,8 @@ app.post('/', (req, res) => {
         password: password,
         date: ' ',
         time: ' ',
-        amenity: ' '
+        amenity: ' ',
+        booking_id: ' '
     })
     store.save()
          .then((result) => {
@@ -145,12 +146,14 @@ app.post('/book/:id/getDate', (req, res) => {
 app.post('/book/:id', (req, res) => {
     const username = req.session.username
     const password = req.session.password
+    var booking_id = Math.floor(Math.random() * 10000) + 1;
 
     data.findOneAndUpdate({username: username, password: password}, 
         {$set:
             {   date: bookingDate,
                 time: Object.values(req.body)[0],
-                amenity: temp
+                amenity: temp,
+                booking_id: booking_id
             } 
         }, {new: true}, (err, doc) => {
         if (err) {
@@ -166,10 +169,9 @@ app.get('/thankyou', (req, res) => {
     const username = req.session.username
     const password = req.session.password
 
-    var booking_id = Math.floor(Math.random() * 10000) + 1;
     data.findOne({username: username, password: password})
         .then((result) => {
-                res.render('thankyou', {title: "Booking Confirmed", booking_id, amenity: result.amenity, time: result.time, date: result.date});
+                res.render('thankyou', {title: "Booking Confirmed", booking_id:result.booking_id, amenity: result.amenity, time: result.time, date: result.date});
             })
         .catch((err) => {
             console.log(err)
