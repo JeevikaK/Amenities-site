@@ -73,26 +73,36 @@ app.post('/', (req, res) => {
 app.post('/signup', (req, res) => {
     const {name, username, phone, email, password, confirm_password} = req.body
     console.log(name, username, phone, email, password, confirm_password)
-    if(password != confirm_password){
-        res.render('signup', {title: 'Signup', message: "Passwords do not match. Please re-enter"})
-    }
-    else{
-        const store = new signup({ 
-            name: name,
-            username: username,
-            phone: phone,
-            email: email,
-            password: password,
-            confirm_password: confirm_password
-        })
-        store.save()
-            .then((result) => {
-                res.redirect('home');
+    signup.findOne({username: username})
+    .then((result) => {
+        if(!(result == null)){
+            res.render('signup', {message: "Username already exists!", title: "Login"})
+        }
+        else if(password != confirm_password){
+            res.render('signup', {title: 'Signup', message: "Passwords do not match. Please re-enter"})
+        }
+        else{
+            console.log(result)
+            const store = new signup({ 
+                name: name,
+                username: username,
+                phone: phone,
+                email: email,
+                password: password,
+                confirm_password: confirm_password
             })
-            .catch((err) => {
-                console.log(err);
-        });
-    }
+            store.save()
+                .then((result) => {
+                    res.redirect('home');
+                })
+                .catch((err) => {
+                    console.log(err);
+            });
+        }
+    })
+    .catch((err) => {
+        console.log(err)
+    })
 })
 
 app.get('/home', (req, res) =>{
