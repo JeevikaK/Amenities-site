@@ -109,6 +109,7 @@ app.post('/signup', (req, res) => {
 app.get('/home', (req, res) =>{
     const username = req.session.username
     const password = req.session.password
+    console.log(username, password)
     if(!username || !password){
         res.redirect('/')
     }
