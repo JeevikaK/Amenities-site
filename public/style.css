@@ -504,7 +504,7 @@ body .light{
 }
 
 .container_book{
-    height: auto;
+    height: 100vh;
     background-image: url('/images/home2.jpg');
     background-size: cover;
     background-position: fixed;
@@ -599,6 +599,7 @@ input[type="radio"]{
         display: contents;
     }
     .container_book{
+        height: auto;
         flex-direction: column;
     }
     .calendar{
@@ -694,4 +695,11 @@ input[type="radio"]{
 
 .book_again:hover{
     color: #4d88ff;
+}
+
+/* ----------Thankyou Responsive---------- */
+@media (max-width: 500px) {
+    .thankyou{
+        height: 100vh;
+    }
 }
