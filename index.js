@@ -36,7 +36,7 @@ app.get('/', (req, res) =>{
     res.render('login', {message: "", title: "Login"});
 }); 
 
-app.post('/', (req, res) => {
+app.post('/', async (req, res) => {
     const {username, password} = req.body
     req.session.username = username
     req.session.password = password
@@ -44,7 +44,7 @@ app.post('/', (req, res) => {
     signup.findOne({username: username, password: password})
         .then((result) => {
             if(!(result == null)){
-                console.log(result)
+                res.render('home', {title: 'Home'})
             }
             else{
                 res.render('login', {message: "Username or Password incorrect", title: "Login"})
@@ -53,22 +53,10 @@ app.post('/', (req, res) => {
         .catch((err) => {
             console.log(err)
     })
+    req.session.booking_id = Math.floor(Math.random() * 10000) + 1;
+    var filter = {username : username, password: password, booking_id: req.session.booking_id}
+    await data.create(filter);
 
-    const store = new data({
-        username : username,
-        password: password,
-        date: ' ',
-        time: ' ',
-        amenity: ' ',
-        booking_id: ' '
-    })
-    store.save()
-         .then((result) => {
-            res.redirect('home')
-         })
-         .catch((err) => {
-             console.log(err);
-    });
 })
 
 app.post('/signup', (req, res) => {
@@ -123,55 +111,77 @@ app.get('/signup', (req, res) =>{
     res.render('signup', {title: "Signup", message: ""});
 });
 
-var temp = null
 app.get('/book/:id', (req, res) =>{     
     const username = req.session.username
     const password = req.session.password
+    req.session.temp = req.params.id;
     if(!username || !password){
         res.redirect('/')
     }
     else{
         res.render('book', {id : req.params.id, title: 'Book'});
-        temp = req.params.id;
+        req.session.temp = req.params.id;
     }
 });
 
-var bookingDate = '';
 app.post('/book/:id/getDate', (req, res) => {
     const {selectedDate, month, year} = req.body
     console.log(req.body)
-    bookingDate = selectedDate+'-'+month+'-'+year
-    res.json({bookingDate})
+    req.session.bookingDate = selectedDate+'-'+month+'-'+year
+    BookingDate = req.session.bookingDate
+    res.json({BookingDate})
 })
 
-app.post('/book/:id', (req, res) => {
+app.post('/book/:id', async (req, res) => {
     const username = req.session.username
     const password = req.session.password
-    var booking_id = Math.floor(Math.random() * 10000) + 1;
-
-    data.findOneAndUpdate({username: username, password: password}, 
-        {$set:
-            {   date: bookingDate,
-                time: Object.values(req.body)[0],
-                amenity: temp,
-                booking_id: booking_id
-            } 
-        }, {new: true}, (err, doc) => {
-        if (err) {
-            console.log("Something wrong when updating data!");
-        }
-        console.log(doc);
+    const amenity = req.session.temp
+    const booking_id = req.session.booking_id
+    console.log(booking_id)
+    console.log(amenity)
+    
+    var filter = {username : username, password: password, booking_id: booking_id}
+    var update = {
+        date: req.session.bookingDate,
+        time: Object.values(req.body)[0],
+        amenity: amenity,
+        booking_id: booking_id
+    }
+    let doc = await data.findOneAndUpdate(filter, update, {
+        new: true
     });
 
     res.redirect('/thankyou')
 })
 
+
+app.get('/viewBookings', (req, res) => {
+    username = req.session.username
+    password = req.session.password
+    console.log(username, password)
+    data.find({username: username, password: password})
+        .then((result) => {
+            if(!(result == null)){
+                console.log(result)
+                res.render('viewBookings', {title: 'View Bookings', result})
+            }
+            else{
+                console.log('error')
+            }
+        })
+        .catch((err) => {
+            console.log(err)
+    })
+})
+
 app.get('/thankyou', (req, res) => {
     const username = req.session.username
     const password = req.session.password
-
-    data.findOne({username: username, password: password})
+    const booking_id = req.session.booking_id
+    console.log(booking_id)
+    data.findOne({username: username, password: password, booking_id: booking_id})
         .then((result) => {
+                console.log(result)
                 res.render('thankyou', {title: "Booking Confirmed", booking_id:result.booking_id, amenity: result.amenity, time: result.time, date: result.date});
             })
         .catch((err) => {

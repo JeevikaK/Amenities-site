@@ -11,20 +11,16 @@ const db_input = new Schema({
     required: true,
   },
   time: {
-    type: String,
-    required: true,
+    type: String
    },
   date: {
-    type: String,
-    required: true,
+    type: String
   },
   amenity: {
-    type: String,
-    required: true,
+    type: String
   },
   booking_id: {
-    type: String,
-    required: true
+    type: String
   }
 }, { timestamps: true});
 
