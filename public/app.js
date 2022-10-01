@@ -99,7 +99,7 @@ let c = document.getElementsByClassName('book_right_heading')[0]
 for(let i=0; i<a.length; i++){
     a[i].addEventListener('click', () => {
         date = Number(a[i].textContent)
-        c.textContent='Select time slot on for date:'+Number(a[i].textContent)
+        c.textContent='Select time slot on date:'+Number(a[i].textContent)
         b.style.display='block'
         $.ajax({
             url: `/book/:id/getDate`,

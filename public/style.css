@@ -282,13 +282,6 @@ input[type=text], #password{
         height: 4em;
     }
 }
-/* .swiper-slide.swiper-slide-prev{
-    transform: translate3d(474px, 0px, 0px)
-}      */
-/* .swiper-wrapper content{
-    transform: translate3d(-437px, 0px, 0px)
-}  */
-
 
 /*-----------Booking Page------------*/
 
@@ -625,7 +618,7 @@ input[type="radio"]{
     background-size: cover;
     background-position: fixed;
     background-repeat: no-repeat;
-    height: 100vh;
+    height: auto;
     width: 100vw;
     display: flex;
     flex-direction: column;
@@ -692,7 +685,7 @@ input[type="radio"]{
     cursor: pointer;
 }
 
-.book_again{
+.book_again, .view_bookings{
     padding: 1em;
     text-decoration: none;
     font-size: 1.1em;
